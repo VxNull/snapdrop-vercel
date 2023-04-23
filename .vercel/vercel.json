@@ -6,6 +6,14 @@
   ],
   "routes": [
 	{
+	  "src": "api/server/webrtc",
+	  "dest": "http://localhost:3000/$1",
+	  "headers": {
+		"Connection": "Upgrade",
+		"Upgrade": "websocket"
+	  }
+	},
+	{
 	  "src": "api/server/(.*)",
 	  "dest": "http://localhost:3000/$1",
 	  "headers": {
@@ -13,5 +21,6 @@
 		"Upgrade": "websocket"
 	  }
 	}
+	
   ]
 }
