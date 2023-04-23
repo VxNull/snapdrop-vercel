@@ -8,11 +8,21 @@
   ],
   "routes": [
     {
-      "handle": "filesystem"
+      "src": "/(.*)",
+      "dest": "/server/:1"
     },
     {
-      "src": ".*",
-      "dest": "/index.html"
+      "handle": "filesystem",
+      "src": "/public/(.*)",
+      "dest": "/public/:1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/public/index.html"
+    },
+	{
+      "src": "/server/(.*)",
+      "dest": "http://localhost:3000/server/$1"
     }
   ]
 }
