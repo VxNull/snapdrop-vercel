@@ -1,15 +1,17 @@
 {
   "version": 2,
   "builds": [
-    {
-      "src": "server.js",
-      "use": "@vercel/node"
-    }
+	{ "src": "public/**", "use": "@vercel/static" },
+    { "src": "api/**", "use": "@vercel/node" }
   ],
   "routes": [
 	{
-	  "src": "/server/webrtc",
-	  "dest": "ws://localhost:3000/server/webrtc",
+	  "src": "/server/(.*)",
+	  "dest": "http://localhost:3000/$1",
+	  "headers": {
+		"Connection": "Upgrade",
+		"Upgrade": "websocket"
+	  }
 	}
   ]
 }
