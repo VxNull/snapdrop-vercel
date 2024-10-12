@@ -1,26 +1,12 @@
 {
-  "version": 2,
-  "builds": [
-	{ "src": "public/**", "use": "@vercel/static" },
-    { "src": "/server.js", "use": "@vercel/node" }
-  ],
-  "routes": [
-	{
-	  "src": "server/webrtc",
-	  "dest": "http://localhost:3000/$1",
-	  "headers": {
-		"Connection": "Upgrade",
-		"Upgrade": "websocket"
-	  }
-	},
-	{
-	  "src": "server/(.*)",
-	  "dest": "http://localhost:3000/$1",
-	  "headers": {
-		"Connection": "Upgrade",
-		"Upgrade": "websocket"
-	  }
-	}
-	
-  ]
+	"version": 2,
+	"builds": [
+	  { "src": "public/**", "use": "@vercel/static" },
+	  { "src": "server.js", "use": "@vercel/node" }
+	],
+	"routes": [
+	  { "src": "/server/(.*)", "dest": "/server.js" },
+	  { "src": "/(.*)", "dest": "/public/$1" }
+	]
 }
+
