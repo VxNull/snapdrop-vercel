@@ -2,11 +2,25 @@
 	"version": 2,
 	"builds": [
 	  { "src": "public/**", "use": "@vercel/static" },
-	  { "src": "server.js", "use": "@vercel/node" }
+	  { "src": "/server.js", "use": "@vercel/node" }
 	],
 	"routes": [
-	  { "src": "/server/(.*)", "dest": "/server.js" },
-	  { "src": "/(.*)", "dest": "/public/$1" }
+	  {
+		"src": "server/webrtc",
+		"dest": "https://share.when.pp.ua:3000/$1",
+		"headers": {
+		  "Connection": "Upgrade",
+		  "Upgrade": "websocket"
+		}
+	  },
+	  {
+		"src": "server/(.*)",
+		"dest": "https://share.when.pp.ua:3000/$1",
+		"headers": {
+		  "Connection": "Upgrade",
+		  "Upgrade": "websocket"
+		}
+	  }
+	  
 	]
 }
-
